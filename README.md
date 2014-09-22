@@ -1,6 +1,8 @@
 # GitDayOne
 
-TODO: Write a gem description
+A gem for generating reports on git projects and formatting them for the [Day One](http://dayoneapp.com/)
+application.
+
 
 ## Installation
 
@@ -18,12 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+1. Install Day One [command line
+   tools](https://dayone.zendesk.com/hc/en-us/articles/200258954-Day-One-Tools)
+2. Copy the example file `.git_day_one.yml.example` to `~/.git_day_one.yml`
+3. Change the author name and add projects to projects hash
+4. Run the script `dit_day_one` in the bin directory to test
+5. When ready to add the report to day one run `./bin/git_day_one | dayone new`
