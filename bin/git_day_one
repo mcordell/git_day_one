@@ -1,0 +1,9 @@
+#! /usr/bin/env ruby
+
+require_relative '../lib/git_day_one'
+
+configuration = GitDayOne::Configuration.new([])
+configuration.path = File.expand_path("~/.git_day_one.yml")
+configuration.load_config_from_file
+runner = GitDayOne::ProjectRunner.new(configuration)
+puts runner.report
