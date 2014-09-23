@@ -14,6 +14,11 @@ module GitDayOne
       `#{configuration.git_command}`.split("\n")
     end
 
+    def run_branch_lookup(hash = nil)
+      return nil unless configuration && hash
+      `git branch --contains #{hash}`.split("\n")
+    end
+
     def command_result
        @command_result ||= run_git_command
     end
@@ -63,9 +68,9 @@ module GitDayOne
             commit.additions += add_del_match[1].to_i
             commit.deletions += add_del_match[2].to_i
           end
-        else
         end
       end
+      commit.branches = run_branch_lookup(commit.hash)
       commit
     end
   end

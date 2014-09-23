@@ -1,6 +1,6 @@
 module GitDayOne
   class Commit
-    attr_accessor :hash, :date, :msg_body, :additions, :deletions
+    attr_accessor :hash, :date, :msg_body, :additions, :deletions, :branches
     def initialize
       @msg_body = []
       @additions = 0

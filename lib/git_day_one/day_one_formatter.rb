@@ -20,11 +20,19 @@ commit messages :
     end
 
     def commit_messages
-      commits.reverse.map { |c| additions_del_string(c) + " " + c.date.strftime("%H:%M") + "\t" + c.msg_body.join("\n") }.join("\n")
+      commits.reverse.map { |c| additions_del_string(c) + " " + c.date.strftime("%H:%M") + "\t" + branch(c) +  c.msg_body.join("\n") }.join("\n")
     end
 
     def additions_del_string(commit)
       "+#{commit.additions} | -#{commit.deletions}"
+    end
+
+    def branch(commit)
+      if commit.branches && commit.branches.length == 1
+        "[#{commit.branches[0].gsub(/\A[\* ]*(.*)/, '\1')}] "
+      else
+        ""
+      end
     end
   end
 end
