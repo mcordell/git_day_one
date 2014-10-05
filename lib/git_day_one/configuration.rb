@@ -2,7 +2,7 @@ require 'yaml'
 
 module GitDayOne
   class Configuration
-    GIT_CMD_DATE_FORMAT = "%Y-%m-%d %H:%M"
+    GIT_CMD_DATE_FORMAT = "%Y-%m-%d %H:%M %z"
 
     attr_accessor :start_commit, :stop_commit, :start_time, :stop_time, :git_command, :start_day, :stop_day, :author, :projects, :path
 

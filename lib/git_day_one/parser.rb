@@ -2,7 +2,7 @@ module GitDayOne
   class Parser
     attr_accessor :configuration
     COMMIT_RE = /^commit ([0-9a-f]*)\b/
-    DATE_RE = /date (.*)/
+    DATE_RE = /^date ([A-Za-z]*,\s\d+\s[A-Za-z]*\s\d+\s\d+:\d+:\d+\s[+-]\d+)$/
     ADD_DEL_RE = /^(\d*)\s*(\d*)/
 
     def initialize(configuration)
