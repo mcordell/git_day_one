@@ -14,10 +14,22 @@ module GitDayOne
     def defaults
       @start_commit ||= "________STARTCOMMIT_________"
       @stop_commit ||= "________STOPCOMMIT___________"
-      @start_day ||= Time.now
-      @stop_day ||= start_day
-      @start_time ||= self.class.beginning_of_the_day(start_day)
-      @stop_time ||= self.class.beginning_of_the_day(stop_day) + 23 * 3600 + 59 * 60 + 59
+    end
+
+    def start_time
+      @start_time || self.class.beginning_of_the_day(start_day)
+    end
+
+    def stop_time
+      @stop_time || self.class.end_of_the_day(stop_day)
+    end
+
+    def stop_day
+      @stop_day || start_day
+    end
+
+    def start_day
+      @start_day || Time.now
     end
 
     def git_command
@@ -35,7 +47,12 @@ module GitDayOne
     end
 
     def self.beginning_of_the_day(time)
+      time = time.to_time
       time - time.hour * 3600 - time.min * 60 - time.sec
+    end
+
+    def self.end_of_the_day(time)
+      beginning_of_the_day(time) + 23 * 3600 + 59 * 60 + 59
     end
 
     def self.git_time_format(time)

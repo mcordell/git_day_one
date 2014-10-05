@@ -1,9 +1,26 @@
 #! /usr/bin/env ruby
 
 require_relative '../lib/git_day_one'
+require 'optparse'
+require 'optparse/date'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: git_day_one "
+
+  opts.on('-d', '--start-day [Date]', Date, 'Start day') do |v|
+    options[:start_day] = v
+  end
+
+  opts.on('-c', '--config [PATH]') do |v|
+    options[:configuration_file] = v
+  end
+end.parse!
 
 configuration = GitDayOne::Configuration.new([])
-configuration.path = File.expand_path("~/.git_day_one.yml")
+configuration.path = options[:configuration_file] || File.expand_path("~/.git_day_one.yml")
+configuration.hash_to_vars(options)
 configuration.load_config_from_file
 runner = GitDayOne::ProjectRunner.new(configuration)
 puts runner.report
